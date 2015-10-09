@@ -2,33 +2,38 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_login">
 
-    <RelativeLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/logo">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/insLogin"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_marginTop="80dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_centerInParent="true">
+
+
+        <Button
+            style="@style/ButtonText"
+            android:id="@+id/btnFb"
+            android:layout_margin="4dp"
             android:padding="10dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/transparente_item" >
+            android:paddingLeft="50dp"
+            android:text="Iniciar con Facebook"
+            android:textColor="#FFF"
+            android:background="@drawable/border_white"/>
 
 
+    </LinearLayout>
 
-            <Button
-                style="@style/ButtonText"
-                android:id="@+id/btnFb"
-                android:layout_margin="4dp"
-                android:padding="10dp"
-                android:paddingLeft="50dp"
-                android:text="Iniciar con Facebook"
-                android:background="@drawable/layer_fb"/>
-
-
-        </LinearLayout>
-    </RelativeLayout>
 
 </RelativeLayout>

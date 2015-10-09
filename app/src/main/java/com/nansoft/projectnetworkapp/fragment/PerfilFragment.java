@@ -24,7 +24,7 @@ public class PerfilFragment extends Fragment
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //This layout contains your list view
-        View view = inflater.inflate(R.layout.login, container, false);
+       View view = inflater.inflate(R.layout.activity_authenticate, container, false);
         /*
         //now you must initialize your list view
         ListView listview = (ListView) view.findViewById(R.id.lstvProyectosUsuario);

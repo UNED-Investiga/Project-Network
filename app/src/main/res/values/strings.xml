@@ -8,6 +8,8 @@
     <string name="nombreProyecto">Nombre</string>
     <string name="imagenProyecto">Imagen</string>
     <string name="descripcionProyecto">Descripción</string>
+    <string name="insLogin">Project Network</string>
+
 
     <string name="estado">Estado</string>
     <string name="email">Email</string>
