@@ -21,7 +21,7 @@ public class FragmentPageAdapter extends FragmentPagerAdapter implements PagerSl
     List<Fragment> fragments;
     //private final String[] TITLES = { "Últimos Proyectos", "Mis Proyectos", "Categorías" };
     //private int tabIcons[] = {R.drawable.news_active, R.drawable.handshake, R.drawable.categories};
-    private int tabIcons[] = {R.drawable.news_active,R.drawable.categories};
+    private int tabIcons[] = {R.drawable.news_active,R.drawable.categories,R.drawable.handshake};
     Context mContext;
     /**
      * Constructor

@@ -40,6 +40,15 @@ public class Usuario
     private String biografia;
 
     public Usuario() {
+        this.id = "Sin definir";
+        this.nombre =  "Sin definir";
+        this.primerApellido =  "Sin definir";
+        this.segundoApellido =  "Sin definir";
+        this.email =  "Sin definir";
+        this.telefono =  "Sin definir";
+        this.urlImagen =  "Sin definir";
+        idCargo =  "Sin definir";
+        fechaCreado =  "Sin definir";
     }
 
     public Usuario(String id, String nombre, String primerApellido, String segundoApellido, String email, String telefono, String urlImagen) {
