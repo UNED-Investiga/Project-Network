@@ -40,7 +40,9 @@ public class ProyectoActivity extends ActionBarActivity {
     UsuarioAdapter adapter;
     ImageView imgvSad;
     TextView txtvSad;
-    LinearLayout layoutContenido;
+
+    ListView lstvUsuarios;
+    View headerListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,7 +61,7 @@ public class ProyectoActivity extends ActionBarActivity {
         txtvSad = (TextView) includedLayout.findViewById(R.id.txtvInfoProblema);
 
         txtvSad.setText(getResources().getString(R.string.noconnection));
-        layoutContenido = (LinearLayout) findViewById(R.id.layContenidoProyecto);
+
         try {
             idProyecto = getIntent().getStringExtra("idProyecto");
         }
@@ -67,8 +69,10 @@ public class ProyectoActivity extends ActionBarActivity {
         {
 
         }
+         headerListView = getLayoutInflater().inflate(R.layout.header_project, null);
 
-        ListView lstvUsuarios = (ListView) findViewById(R.id.lstvUsuarios);
+        lstvUsuarios = (ListView) findViewById(R.id.lstvUsuarios);
+        lstvUsuarios.addHeaderView(headerListView);
         adapter = new UsuarioAdapter(this,R.layout.general_item);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swprlInfoProyecto);
@@ -93,7 +97,7 @@ public class ProyectoActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(view.getContext(), PerfilUsuarioActivity.class);
-                intent.putExtra("idUsuario",adapter.getItem(position).getId());
+                intent.putExtra("idUsuario",adapter.getItem(position-1).getId());
                 startActivity(intent);
             }
         });
@@ -213,12 +217,13 @@ public class ProyectoActivity extends ActionBarActivity {
 
     private void cargarVista(final Proyecto pObjProyecto)
     {
-        TextView txtvNombreProyecto = (TextView) findViewById(R.id.txtvNombreProyecto);
-        ImageView imgvEstadoProyecto = (ImageView) findViewById(R.id.imgvEstadoProyecto);
-        ImageView imgvCorreoProyecto = (ImageView) findViewById(R.id.imgvEmailProyecto);
-        ImageView imgvWebProyecto = (ImageView) findViewById(R.id.imgvWebProyecto);
-        TextView txtvDescripcioProyecto = (TextView) findViewById(R.id.txtvDescripcionProyecto);
-        ImageView imgvLogoProyecto = (ImageView) findViewById(R.id.imgvProyecto);
+
+        TextView txtvNombreProyecto = (TextView) headerListView.findViewById(R.id.txtvNombreProyecto);
+        ImageView imgvEstadoProyecto = (ImageView) headerListView.findViewById(R.id.imgvEstadoProyecto);
+        ImageView imgvCorreoProyecto = (ImageView) headerListView.findViewById(R.id.imgvEmailProyecto);
+        ImageView imgvWebProyecto = (ImageView) headerListView.findViewById(R.id.imgvWebProyecto);
+        TextView txtvDescripcioProyecto = (TextView) headerListView.findViewById(R.id.txtvDescripcionProyecto);
+        ImageView imgvLogoProyecto = (ImageView) headerListView.findViewById(R.id.imgvProyecto);
 
         imgvCorreoProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,13 +250,11 @@ public class ProyectoActivity extends ActionBarActivity {
         imgvWebProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try
-                {
+                try {
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pObjProyecto.getWebSite()));
                     startActivity(intent);
-                } catch (ActivityNotFoundException activityException)
-                {
+                } catch (ActivityNotFoundException activityException) {
 
                     Toast.makeText(getApplicationContext(), "Error verifique que tenga un navegador instalado", Toast.LENGTH_SHORT).show();
 
@@ -285,20 +288,23 @@ public class ProyectoActivity extends ActionBarActivity {
                 imgvEstadoProyecto.setImageResource(R.drawable.idea);
                 break;
         }
+
+
+
     }
 
     private void estadoAdapter(boolean pEstadoError)
     {
         if(adapter.isEmpty() && pEstadoError)
         {
-            layoutContenido.setVisibility(View.INVISIBLE);
+
             imgvSad.setVisibility(View.VISIBLE);
             txtvSad.setVisibility(View.VISIBLE);
 
         }
         else
         {
-            layoutContenido.setVisibility(View.VISIBLE);
+
             imgvSad.setVisibility(View.INVISIBLE);
             txtvSad.setVisibility(View.INVISIBLE);
         }

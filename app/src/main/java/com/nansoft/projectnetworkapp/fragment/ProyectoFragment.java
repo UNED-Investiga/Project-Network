@@ -46,6 +46,8 @@ public class ProyectoFragment  extends Fragment
         //This layout contains your list view
         View view = inflater.inflate(R.layout.proyecto_activity, container, false);
 
+
+
         View includedLayout = view.findViewById(R.id.sindatos);
         imgvSad = (ImageView) includedLayout.findViewById(R.id.imgvInfoProblema);
         txtvSad = (TextView) includedLayout.findViewById(R.id.txtvInfoProblema);

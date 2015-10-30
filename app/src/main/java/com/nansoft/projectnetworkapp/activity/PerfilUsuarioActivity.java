@@ -41,7 +41,8 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
     ProyectoAdapter adapter;
     ImageView imgvSad;
     TextView txtvSad;
-    LinearLayout layoutContenido;
+
+    View headerListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +61,12 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
         View includedLayout = findViewById(R.id.sindatos);
         imgvSad = (ImageView) includedLayout.findViewById(R.id.imgvInfoProblema);
         txtvSad = (TextView) includedLayout.findViewById(R.id.txtvInfoProblema);
-        layoutContenido = (LinearLayout) findViewById(R.id.layoutContenidoPerfilUsuario);
 
         txtvSad.setText(getResources().getString(R.string.noconnection));
 
         ListView lstvProyectos = (ListView) findViewById(R.id.lstvProyectosUsuario);
+        headerListView = getLayoutInflater().inflate(R.layout.header_user, null);
+        lstvProyectos.addHeaderView(headerListView);
         adapter = new ProyectoAdapter(this,R.layout.general_item);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swprlPerfilUsuario);
@@ -89,7 +91,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
-                intent.putExtra("idProyecto",adapter.getItem(position).getId());
+                intent.putExtra("idProyecto",adapter.getItem(position-1).getId());
                 startActivity(intent);
             }
         });
@@ -205,11 +207,11 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
 
     private void cargarVista(final Usuario pObjUsuario)
     {
-        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvNombreUsuario);
-        TextView txtvBiografiaUsuario = (TextView) findViewById(R.id.txtvBiografiaUsuario);
-        ImageView imgvEmailUsuario = (ImageView) findViewById(R.id.imgvEmailUsuario);
-        ImageView imgvTelefonoUsuario = (ImageView) findViewById(R.id.imgvTelefonoUsuario);
-        ImageView imgvPerfilUsuario = (ImageView) findViewById(R.id.imgvPerfilUsuario);
+        TextView txtvNombreUsuario = (TextView) headerListView.findViewById(R.id.txtvNombreUsuario);
+        TextView txtvBiografiaUsuario = (TextView) headerListView.findViewById(R.id.txtvBiografiaUsuario);
+        ImageView imgvEmailUsuario = (ImageView) headerListView.findViewById(R.id.imgvEmailUsuario);
+        ImageView imgvTelefonoUsuario = (ImageView) headerListView.findViewById(R.id.imgvTelefonoUsuario);
+        ImageView imgvPerfilUsuario = (ImageView) headerListView.findViewById(R.id.imgvPerfilUsuario);
 
         imgvEmailUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,14 +270,12 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
     {
         if(adapter.isEmpty() && pEstadoError)
         {
-            layoutContenido.setVisibility(View.INVISIBLE);
             imgvSad.setVisibility(View.VISIBLE);
             txtvSad.setVisibility(View.VISIBLE);
 
         }
         else
         {
-            layoutContenido.setVisibility(View.VISIBLE);
             imgvSad.setVisibility(View.INVISIBLE);
             txtvSad.setVisibility(View.INVISIBLE);
         }
