@@ -23,6 +23,7 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.nansoft.projectnetworkapp.helper.CircularImageView;
 import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.helper.CustomMobileService;
 import com.nansoft.projectnetworkapp.model.FacebookUser;
@@ -30,6 +31,7 @@ import com.nansoft.projectnetworkapp.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -183,18 +185,20 @@ public class HomeActivity extends AppCompatActivity
 
     private void LoadUserInformation()
     {
-        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvNombreUsuario1);
+        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvNombreUsuario);
         txtvNombreUsuario.setText(CustomMobileService.USUARIO_LOGUEADO.nombre);
 
-        ImageView imgvPerfilUsuario = (ImageView) findViewById(R.id.imgvPerfilUsuario);
+        CircularImageView imgvPerfilUsuario = (CircularImageView) findViewById(R.id.imgvPerfilUsuario);
 
         Glide
             .with(this)
             .load(CustomMobileService.USUARIO_LOGUEADO.urlImagen)
             .centerCrop()
             .placeholder(R.drawable.picture)
-            .crossFade()
+            .error(R.drawable.picture_removed)
             .into(imgvPerfilUsuario);
+
+
     }
 
     @Override
@@ -241,11 +245,7 @@ public class HomeActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
