@@ -15,18 +15,18 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 import com.nansoft.projectnetworkapp.R;
-import com.nansoft.projectnetworkapp.helper.MobileServiceCustom;
+import com.nansoft.projectnetworkapp.helper.CustomMobileService;
 
-public class AuthenticateActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity
 {
-    MobileServiceCustom customClient;
+    CustomMobileService customClient;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authenticate);
         //getSupportActionBar().hide();
-        customClient = new MobileServiceCustom(this);
+        customClient = new CustomMobileService(this);
         findViewById(R.id.btnFb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +38,7 @@ public class AuthenticateActivity extends AppCompatActivity
         if(checkUser())
         {
             // si es así se inicia la acitivuty principal
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this,HomeActivity.class);
             startActivity(intent);
 
             // se finaliza para que no pueda volver acá
@@ -50,14 +50,8 @@ public class AuthenticateActivity extends AppCompatActivity
     private boolean checkUser()
     {
         // We first try to load a token cache if one exists.
-        if (customClient.loadUserTokenCache(customClient.mClient))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+       return customClient.loadUserTokenCache();
+
     }
 
 
@@ -89,10 +83,10 @@ public class AuthenticateActivity extends AppCompatActivity
                 "Espere un momemento...", true);
 
         // We first try to load a token cache if one exists.
-        if (customClient.loadUserTokenCache(customClient.mClient))
+        if (customClient.loadUserTokenCache())
         {
             // si es así se inicia la acitivuty principal
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this,HomeActivity.class);
             startActivity(intent);
 
             // se finaliza para que no pueda volver acá
@@ -102,7 +96,7 @@ public class AuthenticateActivity extends AppCompatActivity
         else
         {
             // Login using the Google provider.
-            ListenableFuture<MobileServiceUser> mLogin = customClient.mClient.login(MobileServiceAuthenticationProvider.Facebook);
+            ListenableFuture<MobileServiceUser> mLogin = CustomMobileService.mClient.login(MobileServiceAuthenticationProvider.Facebook);
 
             Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
                 @Override
@@ -113,7 +107,7 @@ public class AuthenticateActivity extends AppCompatActivity
                 @Override
                 public void onSuccess(MobileServiceUser user) {
 
-                    customClient.cacheUserToken(customClient.mClient.getCurrentUser());
+                    customClient.cacheUserToken(CustomMobileService.mClient.getCurrentUser());
                     // si es así se inicia la acitivuty principal
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
