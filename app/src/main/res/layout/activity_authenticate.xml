@@ -2,8 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/fondo_login">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_image"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -12,28 +17,19 @@
         android:textColor="#FFF"
         android:gravity="center"
         android:textSize="25dp"
-        android:layout_marginTop="80dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        style="@style/ButtonText"
+        android:id="@+id/btnFb"
         android:padding="10dp"
-        android:layout_centerInParent="true">
-
-
-        <Button
-            style="@style/ButtonText"
-            android:id="@+id/btnFb"
-            android:layout_margin="4dp"
-            android:padding="10dp"
-            android:paddingLeft="50dp"
-            android:text="Iniciar con Facebook"
-            android:textColor="#FFF"
-            android:background="@drawable/border_white"/>
-
-
-    </LinearLayout>
+        android:paddingLeft="50dp"
+        android:text="Iniciar con Facebook"
+        android:textColor="#FFF"
+        android:background="@drawable/border_white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
