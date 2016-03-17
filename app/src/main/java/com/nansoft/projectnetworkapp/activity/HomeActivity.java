@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Pair;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,9 +26,13 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.nansoft.projectnetworkapp.fragment.AreaFragment;
+import com.nansoft.projectnetworkapp.fragment.PerfilFragment;
+import com.nansoft.projectnetworkapp.fragment.ProyectoFragment;
 import com.nansoft.projectnetworkapp.helper.CircularImageView;
 import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.helper.CustomMobileService;
+import com.nansoft.projectnetworkapp.model.Area;
 import com.nansoft.projectnetworkapp.model.FacebookUser;
 import com.nansoft.projectnetworkapp.model.Usuario;
 
@@ -64,6 +71,14 @@ public class HomeActivity extends AppCompatActivity
 
 
         cargarUsuario();
+
+        Fragment fragment = new ProyectoFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // se cambia el fragment
+        fragmentManager.beginTransaction()
+                .replace(R.id.your_placeholder, fragment)
+                .commit();
 
 
     }
@@ -127,8 +142,7 @@ public class HomeActivity extends AppCompatActivity
                                 objUsuarioFacebook.data.PictureURL.PictureURL = "http://graph.facebook.com/" + objUsuarioFacebook.id + "/picture?type=large";
                                 CustomMobileService.USUARIO_LOGUEADO.urlImagen = objUsuarioFacebook.data.PictureURL.PictureURL;
 
-                                if (objUsuarioFacebook.cover != null)
-                                {
+                                if (objUsuarioFacebook.cover != null) {
                                     CustomMobileService.USUARIO_LOGUEADO.coverPicture = objUsuarioFacebook.cover.PictureURL;
                                 }
 
@@ -149,8 +163,7 @@ public class HomeActivity extends AppCompatActivity
                             // obtenemos la imagen del usuario en caso que la haya cambiado
                             CustomMobileService.USUARIO_LOGUEADO.urlImagen = "http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.id + "/picture?type=large";
                             //CustomMobileService.USUARIO_LOGUEADO.setCover_picture(objUsuarioFacebook.cover.PictureURL);
-                            if (objUsuarioFacebook.cover != null)
-                            {
+                            if (objUsuarioFacebook.cover != null) {
                                 CustomMobileService.USUARIO_LOGUEADO.coverPicture = objUsuarioFacebook.cover.PictureURL;
                             }
 
@@ -255,12 +268,45 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
 
+        Fragment fragment = new ProyectoFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        switch (item.getItemId())
+        {
+            case R.id.nav_recent:
+                fragment = new ProyectoFragment();
+                break;
 
+            case R.id.nav_search:
+                fragment = new AreaFragment();
+                break;
+        }
 
+        // se cambia el fragment
+        fragmentManager.beginTransaction()
+                .replace(R.id.your_placeholder, fragment)
+                .commit();
+
+        // establece la navegación al inicio
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
+    }
+
+    private void selectItem(String title) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        // Replace the contents of the container with the new fragment
+        ft.replace(R.id.your_placeholder, new AreaFragment());
+        // or ft.add(R.id.your_placeholder, new FooFragment());
+
+        // Add this transaction to the back stack
+        // Append this transaction to the backstack
+        //ft.addToBackStack("optional tag");
+
+        // Complete the changes added above
+        ft.commit();
+
     }
 }
