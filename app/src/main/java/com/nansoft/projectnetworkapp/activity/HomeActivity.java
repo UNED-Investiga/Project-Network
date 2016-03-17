@@ -14,9 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -118,10 +120,10 @@ public class HomeActivity extends AppCompatActivity
                                 // debemos de insertar el registro
 
                                 // establecemos primero los atributos
-                                CustomMobileService.USUARIO_LOGUEADO.setId(objUsuarioFacebook.id);
-                                CustomMobileService.USUARIO_LOGUEADO.setNombre(objUsuarioFacebook.name);
+                                CustomMobileService.USUARIO_LOGUEADO.id = objUsuarioFacebook.id;
+                                CustomMobileService.USUARIO_LOGUEADO.nombre = objUsuarioFacebook.name;
                                 objUsuarioFacebook.data.PictureURL.PictureURL = "http://graph.facebook.com/" + objUsuarioFacebook.id + "/picture?type=large";
-                                CustomMobileService.USUARIO_LOGUEADO.setUrlImagen(objUsuarioFacebook.data.PictureURL.PictureURL);
+                                CustomMobileService.USUARIO_LOGUEADO.urlImagen = objUsuarioFacebook.data.PictureURL.PictureURL;
 
 
                                 // agregamos el registro
@@ -138,7 +140,7 @@ public class HomeActivity extends AppCompatActivity
 
                         } finally {
                             // obtenemos la imagen del usuario en caso que la haya cambiado
-                            CustomMobileService.USUARIO_LOGUEADO.setUrlImagen("http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.getId() + "/picture?type=large");
+                            CustomMobileService.USUARIO_LOGUEADO.urlImagen = "http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.id + "/picture?type=large";
                             //CustomMobileService.USUARIO_LOGUEADO.setCover_picture(objUsuarioFacebook.cover.PictureURL);
 
 
@@ -161,8 +163,8 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     protected void onPostExecute(Boolean success) {
 
-                        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvNombreUsuario1);
-                        txtvNombreUsuario.setText(CustomMobileService.USUARIO_LOGUEADO.getNombre());
+                        LoadUserInformation();
+
                     }
 
                     @Override
@@ -177,6 +179,22 @@ public class HomeActivity extends AppCompatActivity
 
 
 
+    }
+
+    private void LoadUserInformation()
+    {
+        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvNombreUsuario1);
+        txtvNombreUsuario.setText(CustomMobileService.USUARIO_LOGUEADO.nombre);
+
+        ImageView imgvPerfilUsuario = (ImageView) findViewById(R.id.imgvPerfilUsuario);
+
+        Glide
+            .with(this)
+            .load(CustomMobileService.USUARIO_LOGUEADO.urlImagen)
+            .centerCrop()
+            .placeholder(R.drawable.picture)
+            .crossFade()
+            .into(imgvPerfilUsuario);
     }
 
     @Override

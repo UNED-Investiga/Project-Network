@@ -80,7 +80,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
 
                 try {
                     Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
-                    intent.putExtra("idProyecto", adapter.getItem(position).getId());
+                    intent.putExtra("idProyecto", adapter.getItem(position).id);
                     startActivity(intent);
                 } catch (Exception e) {
 
@@ -127,7 +127,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
                         public void run() {
                             for (Proyecto item : result)
                             {
-                                item.setNombreAux(pNombreArea);
+                                item.nombreAux = pNombreArea;
                                 adapter.add(item);
                                 adapter.notifyDataSetChanged();
                             }

@@ -27,4 +27,5 @@ dependencies {
     compile 'com.microsoft.azure:azure-mobile-services-android-sdk:2.0.2'
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'com.android.support:design:22.2.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

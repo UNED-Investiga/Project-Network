@@ -61,11 +61,11 @@ public class ProyectoAdapter extends ArrayAdapter<Proyecto>
         }
 
 
-        holder.txtvTitulo.setText(currentItem.getNombre());
-        holder.txtvSubtitulo.setText(currentItem.getNombreAux());
+        holder.txtvTitulo.setText(currentItem.nombre);
+        holder.txtvSubtitulo.setText(currentItem.nombreAux);
         holder.txtvFecha.setText(currentItem.getFechaCreacion());
         Glide.with(mContext)
-                .load(currentItem.getUrlImagen().trim())
+                .load(currentItem.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)

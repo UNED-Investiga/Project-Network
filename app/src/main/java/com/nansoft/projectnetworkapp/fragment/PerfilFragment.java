@@ -35,10 +35,10 @@ public class PerfilFragment extends Fragment
         View view = inflater.inflate(R.layout.header_user, container, false);
 
         TextView txtvNombreUsuario = (TextView)  view.findViewById(R.id.txtvNombreUsuario);
-        txtvNombreUsuario.setText(CustomMobileService.USUARIO_LOGUEADO.getNombre());
+        txtvNombreUsuario.setText(CustomMobileService.USUARIO_LOGUEADO.nombre);
 
         Glide.with(this)
-                .load(CustomMobileService.USUARIO_LOGUEADO.getUrlImagen().trim())
+                .load(CustomMobileService.USUARIO_LOGUEADO.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)

@@ -104,8 +104,8 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     {
 
         List<Pair<String, String> > lp = new ArrayList<Pair<String, String> >();
-        lp.add(new Pair("id", customClient.mClient.getCurrentUser().getUserId()));
-        ListenableFuture<FacebookUser> result = customClient.mClient.invokeApi("user", "GET", null, FacebookUser.class);
+        lp.add(new Pair("id", CustomMobileService.mClient.getCurrentUser().getUserId()));
+        ListenableFuture<FacebookUser> result = CustomMobileService.mClient.invokeApi("user", "GET", null, FacebookUser.class);
 
         Futures.addCallback(result, new FutureCallback<FacebookUser>() {
             @Override
@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                     @Override
                     protected void onPreExecute() {
 
-                        mUserTable = customClient.mClient.getTable("usuario", Usuario.class);
+                        mUserTable = CustomMobileService.mClient.getTable("usuario", Usuario.class);
                     }
 
                     @Override
@@ -133,10 +133,8 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                         try {
 
 
-
                             // buscamos por el usuario
                             CustomMobileService.USUARIO_LOGUEADO = mUserTable.lookUp(objUsuarioFacebook.id).get();
-
 
 
                             return true;
@@ -156,11 +154,10 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                                 // debemos de insertar el registro
 
                                 // establecemos primero los atributos
-                                CustomMobileService.USUARIO_LOGUEADO.setId(objUsuarioFacebook.id);
-                                CustomMobileService.USUARIO_LOGUEADO.setNombre(objUsuarioFacebook.name);
+                                CustomMobileService.USUARIO_LOGUEADO.id = objUsuarioFacebook.id;
+                                CustomMobileService.USUARIO_LOGUEADO.nombre = objUsuarioFacebook.name;
                                 objUsuarioFacebook.data.PictureURL.PictureURL = "http://graph.facebook.com/" + objUsuarioFacebook.id + "/picture?type=large";
-                                CustomMobileService.USUARIO_LOGUEADO.setUrlImagen(objUsuarioFacebook.data.PictureURL.PictureURL);
-
+                                CustomMobileService.USUARIO_LOGUEADO.urlImagen = objUsuarioFacebook.data.PictureURL.PictureURL;
 
 
                                 // agregamos el registro
@@ -177,9 +174,8 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
 
                         } finally {
                             // obtenemos la imagen del usuario en caso que la haya cambiado
-                            CustomMobileService.USUARIO_LOGUEADO.setUrlImagen("http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.getId() + "/picture?type=large");
+                            CustomMobileService.USUARIO_LOGUEADO.urlImagen = "http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.id + "/picture?type=large";
                             //CustomMobileService.USUARIO_LOGUEADO.setCover_picture(objUsuarioFacebook.cover.PictureURL);
-
 
 
                             try {
@@ -202,6 +198,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                     protected void onPostExecute(Boolean success) {
 
 
+
                     }
 
                     @Override
@@ -212,8 +209,6 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
 
             }
         });
-
-
 
 
     }

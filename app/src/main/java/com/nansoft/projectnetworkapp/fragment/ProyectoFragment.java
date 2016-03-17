@@ -82,7 +82,7 @@ public class ProyectoFragment  extends Fragment
 
                 try {
                     Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
-                    intent.putExtra("idProyecto", adapter.getItem(position).getId());
+                    intent.putExtra("idProyecto", adapter.getItem(position).id);
                     startActivity(intent);
                 } catch (Exception e) {
 
@@ -130,9 +130,9 @@ public class ProyectoFragment  extends Fragment
                     for (Proyecto item : result)
                     {
                         objArea = new Area();
-                        objArea = mAreaTable.lookUp(item.getIdArea()).get();
+                        objArea = mAreaTable.lookUp(item.idArea).get();
 
-                        item.setNombreAux(objArea.getNombre());
+                        item.nombreAux = objArea.nombre;
 
                     }
 

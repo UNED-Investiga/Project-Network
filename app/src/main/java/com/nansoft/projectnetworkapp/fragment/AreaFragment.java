@@ -83,8 +83,8 @@ public class AreaFragment extends Fragment
 
                 try {
                     Intent intent = new Intent(view.getContext(), ProyectoAreaActivity.class);
-                    intent.putExtra("idArea", adapter.getItem(position).getId());
-                    intent.putExtra("nombreArea",adapter.getItem(position).getNombre());
+                    intent.putExtra("idArea", adapter.getItem(position).id);
+                    intent.putExtra("nombreArea",adapter.getItem(position).nombre);
                     startActivity(intent);
                 } catch (Exception e) {
 

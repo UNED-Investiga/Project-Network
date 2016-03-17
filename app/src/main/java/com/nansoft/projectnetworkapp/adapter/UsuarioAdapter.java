@@ -53,7 +53,7 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario>
         ViewHolder holder = (ViewHolder) row.getTag();
 
         rutaImagen = "picture";
-        switch(currentItem.getIdCargo())
+        switch(currentItem.idCargo)
         {
             case "1":
                 rutaImagen = "administrator";
@@ -72,7 +72,7 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario>
         holder.imgLogo.setImageResource(res.getIdentifier(rutaImagen,
                 "drawable", mContext.getPackageName()));
 
-        holder.txtvTitulo.setText(currentItem.getNombre() + " " + currentItem.getPrimerApellido() + " " + currentItem.getSegundoApellido());
+        holder.txtvTitulo.setText(currentItem.nombre + " " + currentItem.primerApellido + " " + currentItem.segundoApellido);
         holder.txtvFechaCreado.setText(currentItem.getFechaCreado());
 
         return row;
