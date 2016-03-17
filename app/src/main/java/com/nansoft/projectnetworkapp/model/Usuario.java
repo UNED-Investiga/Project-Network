@@ -32,6 +32,9 @@ public class Usuario
     @SerializedName("urlimagen")
     public String urlImagen;
 
+    @SerializedName("cover_picture")
+    public String coverPicture;
+
     public String idCargo;
 
     public String fechaCreado;

@@ -127,6 +127,11 @@ public class HomeActivity extends AppCompatActivity
                                 objUsuarioFacebook.data.PictureURL.PictureURL = "http://graph.facebook.com/" + objUsuarioFacebook.id + "/picture?type=large";
                                 CustomMobileService.USUARIO_LOGUEADO.urlImagen = objUsuarioFacebook.data.PictureURL.PictureURL;
 
+                                if (objUsuarioFacebook.cover != null)
+                                {
+                                    CustomMobileService.USUARIO_LOGUEADO.coverPicture = objUsuarioFacebook.cover.PictureURL;
+                                }
+
 
                                 // agregamos el registro
                                 mUserTable.insert(CustomMobileService.USUARIO_LOGUEADO);
@@ -144,7 +149,10 @@ public class HomeActivity extends AppCompatActivity
                             // obtenemos la imagen del usuario en caso que la haya cambiado
                             CustomMobileService.USUARIO_LOGUEADO.urlImagen = "http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.id + "/picture?type=large";
                             //CustomMobileService.USUARIO_LOGUEADO.setCover_picture(objUsuarioFacebook.cover.PictureURL);
-
+                            if (objUsuarioFacebook.cover != null)
+                            {
+                                CustomMobileService.USUARIO_LOGUEADO.coverPicture = objUsuarioFacebook.cover.PictureURL;
+                            }
 
                             try {
                                 mUserTable.update(CustomMobileService.USUARIO_LOGUEADO).get();
@@ -185,10 +193,10 @@ public class HomeActivity extends AppCompatActivity
 
     private void LoadUserInformation()
     {
-        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvNombreUsuario);
+        TextView txtvNombreUsuario = (TextView) findViewById(R.id.txtvUserProfileName);
         txtvNombreUsuario.setText(CustomMobileService.USUARIO_LOGUEADO.nombre);
 
-        CircularImageView imgvPerfilUsuario = (CircularImageView) findViewById(R.id.imgvPerfilUsuario);
+        CircularImageView imgvPerfilUsuario = (CircularImageView) findViewById(R.id.imgvUserProfilePhoto);
 
         Glide
             .with(this)
@@ -197,6 +205,16 @@ public class HomeActivity extends AppCompatActivity
             .placeholder(R.drawable.picture)
             .error(R.drawable.picture_removed)
             .into(imgvPerfilUsuario);
+
+        ImageView imgvCover = (ImageView) findViewById(R.id.imgvUserProfileCover);
+
+        Glide
+            .with(this)
+            .load(CustomMobileService.USUARIO_LOGUEADO.coverPicture)
+            .centerCrop()
+            .placeholder(R.drawable.picture)
+            .error(R.drawable.picture_removed)
+            .into(imgvCover);
 
 
     }
