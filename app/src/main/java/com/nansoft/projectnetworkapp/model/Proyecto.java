@@ -51,7 +51,23 @@ public class Proyecto
 
     public String idCargoAux;
 
-    public String nombreAux;
+    @SerializedName("nombre_area")
+    public String nombreArea;
+
+    @SerializedName("id_usuario")
+    public String idUsuario;
+
+    @SerializedName("primerapellido_usuario")
+    public String primerApellidoUsuario;
+
+    @SerializedName("segundoapellido_usuario")
+    public String segundoApellidoUsuario;
+
+    @SerializedName("nombre_usuario")
+    public String nombreUsuario;
+
+    @SerializedName("urlimagen_usuario")
+    public String urlImagenUsuario;
 
     public Proyecto() {
     }

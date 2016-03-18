@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/layUserInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true" >
+
+            <com.nansoft.projectnetworkapp.helper.CircularImageView
+                xmlns:app="http://schemas.android.com/apk/res/com.nansoft.projectnetworkapp"
+                android:id="@+id/imgvUserImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/picture"
+                app:border="true"/>
+
+
+            <TextView
+                android:id="@+id/txtvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Carlos Castro Brenes"
+                android:textColor="@color/primary_text"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/txtvProjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/test"
+            android:textColor="@color/primary_text"
+            android:layout_below="@id/layUserInfo"
+            android:layout_marginTop="7dp" />
+
+        <ImageView
+            android:id="@+id/imgvProjectImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/txtvProjectName"
+            android:src="@drawable/handshake"
+            android:scaleType="centerInside"
+            android:layout_margin="10dp"
+            />
+
+
+        <TextView
+            android:id="@+id/txtvAreaName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/test"
+            android:textColor="@color/secondary_text"
+            android:layout_toRightOf="@id/imgvProjectImage"
+            android:layout_alignBottom="@id/imgvProjectImage"/>
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+

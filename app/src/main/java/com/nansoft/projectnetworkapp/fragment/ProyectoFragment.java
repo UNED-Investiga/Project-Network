@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
@@ -55,7 +62,7 @@ public class ProyectoFragment  extends Fragment
         //now you must initialize your list view
         ListView listview = (ListView) view.findViewById(R.id.lstvGeneral);
 
-        adapter = new ProyectoAdapter(view.getContext(), R.layout.general_item);
+        adapter = new ProyectoAdapter(view.getContext(), R.layout.project_item);
 
 
         listview.setAdapter(adapter);
@@ -90,7 +97,9 @@ public class ProyectoFragment  extends Fragment
             }
         });
 
-        cargarProyectos(getActivity());
+        //cargarProyectos(getActivity());
+
+        cargarComentarios(getActivity());
         return view;
     }
 
@@ -132,7 +141,7 @@ public class ProyectoFragment  extends Fragment
                         objArea = new Area();
                         objArea = mAreaTable.lookUp(item.idArea).get();
 
-                        item.nombreAux = objArea.nombre;
+                        item.nombreArea = objArea.nombre;
 
                     }
 
@@ -173,6 +182,86 @@ public class ProyectoFragment  extends Fragment
                 super.onCancelled();
             }
         }.execute();
+    }
+
+    public void cargarComentarios(final FragmentActivity activity) {
+
+
+        try {
+
+            MobileServiceClient mClient = new MobileServiceClient(
+                    "https://msprojectnetworkjs.azure-mobile.net/",
+                    "gSewfUQpGFAVMRajseDOZwqCCRUwwD62",
+                    activity.getApplicationContext()
+            );
+
+
+            List<Pair<String, String>> parameters = new ArrayList<Pair<String, String>>();
+            //parameters.add(new Pair<String, String>("idnew",ID_NOTICIA));
+
+            ListenableFuture<JsonElement> lst = mClient.invokeApi("ultimosproyectos", "GET", parameters);
+
+            Futures.addCallback(lst, new FutureCallback<JsonElement>() {
+                @Override
+                public void onFailure(Throwable exc) {
+
+                    estadoAdapter(true);
+                }
+
+                @Override
+                public void onSuccess(JsonElement result) {
+
+                    // se verifica si el resultado es un array Json
+                    if (result.isJsonArray()) {
+                        // obtenemos el resultado como un JsonArray
+                        JsonArray jsonArray = result.getAsJsonArray();
+                        Gson objGson = new Gson();
+
+
+                        // se deserializa el array
+                        final Proyecto[] myTypes = objGson.fromJson(jsonArray, Proyecto[].class);
+
+
+                        activity.runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                for (Proyecto item : myTypes)
+                                {
+
+                                    adapter.add(item);
+                                    adapter.notifyDataSetChanged();
+                                }
+
+                            }
+                        });
+ /*
+                        mAdapter = new ComentarioAdapter(myTypes, ComentarioActivity.this);
+                        mRecyclerView.setAdapter(mAdapter);
+                        */
+
+                        int a = 8;
+                    }
+
+                    /*
+                    if (mAdapter.getItemCount() == 0) {
+                        estadoAdapter(true);
+                    } else {
+                        estadoAdapter(false);
+                    }
+                    */
+                    mSwipeRefreshLayout.setRefreshing(false);
+
+
+                }
+            });
+            mSwipeRefreshLayout.setEnabled(true);
+        }
+        catch (Exception e )
+        {
+            estadoAdapter(true);
+        }
+
     }
 
     private void estadoAdapter(boolean pEstadoError)

@@ -159,7 +159,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
 
                         objArea = new Area();
                         objArea = mAreaTable.lookUp(objProyecto.idArea).get();
-                        objProyecto.nombreAux = objArea.nombre;
+                        objProyecto.nombreArea = objArea.nombre;
                         objProyecto.idCargoAux = item.idCargo;
                         lstProyectos.add(objProyecto);
                     }

@@ -127,7 +127,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
                         public void run() {
                             for (Proyecto item : result)
                             {
-                                item.nombreAux = pNombreArea;
+                                item.nombreArea = pNombreArea;
                                 adapter.add(item);
                                 adapter.notifyDataSetChanged();
                             }
