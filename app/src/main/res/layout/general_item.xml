@@ -5,8 +5,7 @@
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="15dp">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-
+                android:textColor="@color/primary_text"
                 android:layout_alignTop="@+id/imgvLogoGeneral"
                 android:layout_toRightOf="@+id/imgvLogoGeneral"
                 android:layout_toEndOf="@+id/imgvLogoGeneral"
@@ -39,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="@string/test"
-                android:textColor="@color/android_darkorange"
+                android:textColor="@color/secondary_text"
                 android:layout_below="@id/txtvTituloGeneral"
                 android:layout_alignLeft="@+id/txtvTituloGeneral" />
 

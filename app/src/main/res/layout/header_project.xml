@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtvNombreProyecto"
-        android:textColor="@color/action_bar"
+        android:textColor="@color/primary_text"
         android:text="@string/project_name"
         android:layout_gravity="center_horizontal"
         android:textAlignment="center" />
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="@string/estado"
             android:layout_weight="1"
-            android:textColor="@color/action_bar"
+            android:textColor="@color/primary_text"
             android:textAlignment="center"
             android:gravity="center"/>
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="@string/email"
             android:layout_weight="1"
-            android:textColor="@color/action_bar"
+            android:textColor="@color/primary_text"
             android:textAlignment="center"
             android:gravity="center"/>
 
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/website"
             android:layout_weight="1"
-            android:textColor="@color/action_bar"
+            android:textColor="@color/primary_text"
             android:textAlignment="center"
             android:gravity="center"/>
 
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/descripcionProyecto"
-        android:textColor="@color/action_bar"/>
+        android:textColor="@color/primary_text"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -105,6 +105,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/integrantes"
-        android:textColor="@color/action_bar"/>
+        android:textColor="@color/primary_text"/>
 
 </LinearLayout>

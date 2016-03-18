@@ -43,6 +43,8 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class HomeActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -290,6 +292,9 @@ public class HomeActivity extends AppCompatActivity
         // establece la navegación al inicio
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        // se resalta el item que se selecciono para que el usuario tenga noción del lugar donde está
+        navigationView.getMenu().findItem(item.getItemId()).setChecked(true);
 
         return true;
     }

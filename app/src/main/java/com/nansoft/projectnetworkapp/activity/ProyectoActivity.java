@@ -80,7 +80,7 @@ public class ProyectoActivity extends ActionBarActivity {
 
 
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

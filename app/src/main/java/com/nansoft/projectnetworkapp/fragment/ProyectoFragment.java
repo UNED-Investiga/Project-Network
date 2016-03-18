@@ -60,7 +60,7 @@ public class ProyectoFragment  extends Fragment
 
         listview.setAdapter(adapter);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swprlUltimosProyectos);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

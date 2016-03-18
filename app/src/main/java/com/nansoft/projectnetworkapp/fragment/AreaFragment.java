@@ -61,7 +61,7 @@ public class AreaFragment extends Fragment
         gridView.setAdapter(adapter);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swprlArea);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

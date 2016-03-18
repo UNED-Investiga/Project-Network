@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity
 
                     customClient.cacheUserToken(CustomMobileService.mClient.getCurrentUser());
                     // si es así se inicia la acitivuty principal
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     startActivity(intent);
 
                     // se finaliza para que no pueda volver acá

@@ -19,7 +19,7 @@
 
     <style name="stlLetras" parent="stlBaseComponent">
         <item name="android:textSize">20dp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/primary_text</item>
     </style>
 
     <style name="ProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal" />
