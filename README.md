@@ -18,6 +18,10 @@ You can download the current version from Google Play
 
 ![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/new-ui/app/src/main/res/screenshot/00.png)
 
+![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/new-ui/app/src/main/res/screenshot/01.png)
+
+![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/new-ui/app/src/main/res/screenshot/02.png)
+
 ## License
 
 GPL
