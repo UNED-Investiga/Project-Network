@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp"
     android:layout_margin="10dp"
-    android:background="@drawable/fondoredondo">
+    android:background="@color/primary">
 
     <ImageView
         android:id="@+id/imgvArea"

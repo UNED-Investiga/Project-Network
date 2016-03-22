@@ -43,7 +43,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
     TextView txtvSad;
 
     View headerListView;
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -311,4 +311,5 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    */
 }

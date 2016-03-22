@@ -31,6 +31,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
     ImageView imgvSad;
     TextView txtvSad;
 
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,5 +200,5 @@ public class ProyectoAreaActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
 }

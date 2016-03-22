@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
@@ -36,6 +39,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.lang.reflect.Type;
+
 /**
  * Created by User on 7/8/2015.
  */
@@ -45,6 +50,7 @@ public class ProyectoFragment  extends Fragment
     ProyectoAdapter adapter;
     ImageView imgvSad;
     TextView txtvSad;
+    ArrayList <Proyecto> lstProjects;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,19 +59,23 @@ public class ProyectoFragment  extends Fragment
         //This layout contains your list view
         View view = inflater.inflate(R.layout.proyecto_activity, container, false);
 
-
-
+        // layout de error
         View includedLayout = view.findViewById(R.id.sindatos);
         imgvSad = (ImageView) includedLayout.findViewById(R.id.imgvInfoProblema);
         txtvSad = (TextView) includedLayout.findViewById(R.id.txtvInfoProblema);
         txtvSad.setText(getResources().getString(R.string.noconnection));
+
+        lstProjects = new ArrayList<Proyecto>();
+
         //now you must initialize your list view
-        ListView listview = (ListView) view.findViewById(R.id.lstvGeneral);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.lstvGeneral);
 
-        adapter = new ProyectoAdapter(view.getContext(), R.layout.project_item);
+        adapter = new ProyectoAdapter(view.getContext(),lstProjects);
 
 
-        listview.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swprlUltimosProyectos);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
@@ -73,7 +83,7 @@ public class ProyectoFragment  extends Fragment
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                cargarProyectos(getActivity());
+               // cargarProyectos(getActivity());
             }
         });
         mSwipeRefreshLayout.post(new Runnable() {
@@ -82,8 +92,8 @@ public class ProyectoFragment  extends Fragment
                 mSwipeRefreshLayout.setRefreshing(true);
             }
         });
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*
+        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
@@ -96,93 +106,12 @@ public class ProyectoFragment  extends Fragment
                 }
             }
         });
-
-        //cargarProyectos(getActivity());
+*/
 
         cargarComentarios(getActivity());
         return view;
     }
 
-    public void cargarProyectos(final FragmentActivity activity) {
-        estadoAdapter(false);
-        mSwipeRefreshLayout.setEnabled(false);
-        new AsyncTask<Void, Void, Boolean>() {
-
-            MobileServiceClient mClient;
-            MobileServiceTable<Proyecto> mProyectoTable;
-            MobileServiceTable<Area> mAreaTable;
-            Area objArea;
-
-            @Override
-            protected void onPreExecute()
-            {
-                try {
-
-                    mClient = new MobileServiceClient(
-                            "https://msprojectnetworkjs.azure-mobile.net/",
-                            "gSewfUQpGFAVMRajseDOZwqCCRUwwD62",
-                            activity.getApplicationContext()
-                    );
-                    adapter.clear();
-                } catch (MalformedURLException e) {
-
-                }
-                mProyectoTable = mClient.getTable("Proyecto", Proyecto.class);
-                mAreaTable = mClient.getTable("Area",Area.class);
-            }
-
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                try {
-                    final MobileServiceList<Proyecto> result = mProyectoTable.where().select("id","nombre","urlimagen","fechacreacion","__createdAt","idarea").orderBy("fechacreacion",QueryOrder.Descending).top(15).execute().get();
-
-                    for (Proyecto item : result)
-                    {
-                        objArea = new Area();
-                        objArea = mAreaTable.lookUp(item.idArea).get();
-
-                        item.nombreArea = objArea.nombre;
-
-                    }
-
-                    activity.runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            for (Proyecto item : result)
-                            {
-
-                                adapter.add(item);
-                                adapter.notifyDataSetChanged();
-                            }
-
-                        }
-                    });
-                    return true;
-                } catch (Exception exception) {
-
-                }
-                return false;
-            }
-
-            @Override
-            protected void onPostExecute(Boolean success)
-            {
-
-                mSwipeRefreshLayout.setRefreshing(false);
-
-                mSwipeRefreshLayout.setEnabled(true);
-
-                estadoAdapter(success);
-            }
-
-            @Override
-            protected void onCancelled()
-            {
-                super.onCancelled();
-            }
-        }.execute();
-    }
 
     public void cargarComentarios(final FragmentActivity activity) {
 
@@ -219,28 +148,15 @@ public class ProyectoFragment  extends Fragment
 
 
                         // se deserializa el array
-                        final Proyecto[] myTypes = objGson.fromJson(jsonArray, Proyecto[].class);
+                        Type collectionType = new TypeToken<List<Proyecto>>(){}.getType();
+
+                        lstProjects = objGson.fromJson(jsonArray, collectionType);
+                        adapter.setData(lstProjects);
 
 
-                        activity.runOnUiThread(new Runnable() {
+                        adapter.notifyDataSetChanged();
 
-                            @Override
-                            public void run() {
-                                for (Proyecto item : myTypes)
-                                {
 
-                                    adapter.add(item);
-                                    adapter.notifyDataSetChanged();
-                                }
-
-                            }
-                        });
- /*
-                        mAdapter = new ComentarioAdapter(myTypes, ComentarioActivity.this);
-                        mRecyclerView.setAdapter(mAdapter);
-                        */
-
-                        int a = 8;
                     }
 
                     /*
@@ -266,7 +182,7 @@ public class ProyectoFragment  extends Fragment
 
     private void estadoAdapter(boolean pEstadoError)
     {
-        if(adapter.isEmpty() && pEstadoError)
+        if(lstProjects.isEmpty() && pEstadoError)
         {
             imgvSad.setVisibility(View.VISIBLE);
             txtvSad.setVisibility(View.VISIBLE);

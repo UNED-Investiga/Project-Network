@@ -2,6 +2,7 @@ package com.nansoft.projectnetworkapp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,83 +17,82 @@ import com.nansoft.projectnetworkapp.model.Proyecto;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by User on 7/8/2015.
  */
-public class ProyectoAdapter extends ArrayAdapter<Proyecto>
+public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHolder>
 {
     Context mContext;
     int mLayoutResourceId;
 
-    public ProyectoAdapter(Context context, int resource)
-    {
-        super(context, resource);
-        mContext = context;
-        mLayoutResourceId = resource;
+    // Store a member variable for the contacts
+    private List<Proyecto> proyects;
 
+
+
+    public ProyectoAdapter(Context pContext,List <Proyecto> pProyects)
+    {
+        mContext = pContext;
+        proyects = pProyects;
     }
 
+    public void setData(List <Proyecto> pProyects)
+    {
+        proyects = pProyects;
+    }
+
+    // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public ProyectoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
 
-        View row = convertView;
-        final ViewHolder holder;
-        final Proyecto currentItem = getItem(position);
+        // Inflate the custom layout
+        View contactView = inflater.inflate(R.layout.project_item, parent, false);
 
-        // verificamos si la fila que se va dibujar no existe
-        if (row == null)
-        {
-            // si es así la creamos
-            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-            row = inflater.inflate(mLayoutResourceId, parent, false);
-            holder = new ViewHolder();
-            holder.txtvTitulo = (TextView) row.findViewById(R.id.txtvProjectName);
-            holder.txtvSubtitulo = (TextView) row.findViewById(R.id.txtvAreaName);
-            //holder.txtvFecha = (TextView) row.findViewById(R.id.txtvDateCreated);
-            holder.imgLogo = (ImageView) row.findViewById(R.id.imgvProjectImage);
-            holder.imgUserImage = (ImageView) row.findViewById(R.id.imgvUserImage);
-            holder.txtvUerName = (TextView) row.findViewById(R.id.txtvUserName);
-            row.setTag(holder);
-        }
-        else
-        {
-            // en caso contrario la recuperamos
-            holder = (ViewHolder) convertView.getTag();
-        }
-
-
-        holder.txtvTitulo.setText(currentItem.nombre);
-        holder.txtvSubtitulo.setText(currentItem.nombreArea);
-        //holder.txtvFecha.setText(currentItem.getFechaCreacion());
-        holder.txtvUerName.setText(currentItem.nombreUsuario);
-
-        Glide.with(mContext)
-                .load(currentItem.urlImagen.trim())
-                .asBitmap()
-                .fitCenter()
-                .placeholder(R.drawable.picture)
-                .error(R.drawable.picture_removed)
-                .into(holder.imgLogo);
-
-
-        Glide.with(mContext)
-                .load(currentItem.urlImagenUsuario.trim())
-                .asBitmap()
-                .fitCenter()
-                .placeholder(R.drawable.picture)
-                .error(R.drawable.picture_removed)
-                .into(holder.imgUserImage);
-
-
-        return row;
-
+        // Return a new holder instance
+        ViewHolder viewHolder = new ViewHolder(contactView);
+        return viewHolder;
     }
 
+    // Involves populating data into the item through holder
+    @Override
+    public void onBindViewHolder(ProyectoAdapter.ViewHolder viewHolder, int position) {
+        // Get the data model based on position
+        Proyecto proyect = proyects.get(position);
+
+        // Set item views based on the data model
+        viewHolder.txtvTitulo.setText(proyect.nombre);
+        viewHolder.txtvSubtitulo.setText(proyect.nombreArea);
+        viewHolder.txtvUerName.setText(proyect.nombreUsuario);
+
+        Glide.with(mContext)
+                .load(proyect.urlImagen.trim())
+                .asBitmap()
+                .fitCenter()
+                .placeholder(R.drawable.picture)
+                .error(R.drawable.picture_removed)
+                .into(viewHolder.imgLogo);
 
 
-    static class ViewHolder
+        Glide.with(mContext)
+                .load(proyect.urlImagenUsuario.trim())
+                .asBitmap()
+                .fitCenter()
+                .placeholder(R.drawable.picture)
+                .error(R.drawable.picture_removed)
+                .into(viewHolder.imgUserImage);
+    }
+
+    // Return the total count of items
+    @Override
+    public int getItemCount() {
+        return proyects.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder
     {
 
         public ImageView imgLogo;
@@ -101,6 +101,23 @@ public class ProyectoAdapter extends ArrayAdapter<Proyecto>
         public TextView txtvTitulo;
         public TextView txtvSubtitulo;
         public TextView txtvFecha;
+
+        // We also create a constructor that accepts the entire item row
+        // and does the view lookups to find each subview
+        public ViewHolder(View itemView) {
+            // Stores the itemView in a public final member variable that can be used
+            // to access the context from any ViewHolder instance.
+            super(itemView);
+
+            txtvTitulo = (TextView) itemView.findViewById(R.id.txtvProjectName);
+            txtvSubtitulo = (TextView) itemView.findViewById(R.id.txtvAreaName);
+            //holder.txtvFecha = (TextView) row.findViewById(R.id.txtvDateCreated);
+            imgLogo = (ImageView) itemView.findViewById(R.id.imgvProjectImage);
+            imgUserImage = (ImageView) itemView.findViewById(R.id.imgvUserImage);
+            txtvUerName = (TextView) itemView.findViewById(R.id.txtvUserName);
+
+
+        }
 
 
     }
