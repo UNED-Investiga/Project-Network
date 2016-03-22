@@ -25,21 +25,18 @@ import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.adapter.ProyectoAdapter;
 import com.nansoft.projectnetworkapp.model.Proyecto;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.lang.reflect.Type;
 
-/**
- * Created by User on 7/8/2015.
- */
-public class ProyectoFragment  extends Fragment
-{
+public class MyProjectsFragment extends Fragment {
+
     SwipeRefreshLayout mSwipeRefreshLayout;
     ProyectoAdapter adapter;
     ImageView imgvSad;
     TextView txtvSad;
-    ArrayList <Proyecto> lstProjects;
+    ArrayList<Proyecto> lstProjects;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +69,7 @@ public class ProyectoFragment  extends Fragment
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-               // cargarProyectos(getActivity());
+                // cargarProyectos(getActivity());
             }
         });
         mSwipeRefreshLayout.post(new Runnable() {
@@ -137,7 +134,8 @@ public class ProyectoFragment  extends Fragment
 
 
                         // se deserializa el array
-                        Type collectionType = new TypeToken<List<Proyecto>>(){}.getType();
+                        Type collectionType = new TypeToken<List<Proyecto>>() {
+                        }.getType();
 
                         lstProjects = objGson.fromJson(jsonArray, collectionType);
                         adapter.setData(lstProjects);
@@ -184,4 +182,5 @@ public class ProyectoFragment  extends Fragment
             txtvSad.setVisibility(View.INVISIBLE);
         }
     }
+
 }
