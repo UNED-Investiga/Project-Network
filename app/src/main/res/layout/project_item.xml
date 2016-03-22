@@ -86,16 +86,17 @@
                 android:gravity="center_horizontal">
 
                 <ImageView
-                    android:id="@+id/imgvFavourite"
+                    android:id="@+id/imgvFavorite"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
                     android:src="@drawable/favorite"
                     android:layout_gravity="center" />
 
                 <TextView
+                    android:id="@+id/txtvQuantityFavorites"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_toRightOf="@id/imgvFavourite"
+                    android:layout_toRightOf="@id/imgvFavorite"
                     android:text="0"
 
                     android:gravity="center_vertical"/>

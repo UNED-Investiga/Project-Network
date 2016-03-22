@@ -2,6 +2,7 @@ package com.nansoft.projectnetworkapp.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.model.Proyecto;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,17 +62,17 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ProyectoAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final ProyectoAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
-        Proyecto proyect = proyects.get(position);
+        final Proyecto project = proyects.get(position);
 
         // Set item views based on the data model
-        viewHolder.txtvTitulo.setText(proyect.nombre);
-        viewHolder.txtvSubtitulo.setText(proyect.nombreArea);
-        viewHolder.txtvUerName.setText(proyect.nombreUsuario);
+        viewHolder.txtvTitulo.setText(project.nombre);
+        viewHolder.txtvSubtitulo.setText(project.nombreArea);
+        viewHolder.txtvUerName.setText(project.nombreUsuario);
 
         Glide.with(mContext)
-                .load(proyect.urlImagen.trim())
+                .load(project.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
@@ -78,12 +81,44 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
 
 
         Glide.with(mContext)
-                .load(proyect.urlImagenUsuario.trim())
+                .load(project.urlImagenUsuario.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
                 .error(R.drawable.picture_removed)
                 .into(viewHolder.imgUserImage);
+
+        // click listeners
+        viewHolder.imgFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int newImage;
+
+                // cambiamos el estado actual
+                project.favorito = !project.favorito;
+
+                // verificamos la acción que debemos realizar
+                if (project.favorito)
+                {
+                    // acción de seguir
+                    newImage = R.drawable.favorite_filled;
+                    project.cantidadFavoritos  += 1;
+                }
+                else
+                {
+                    // acción dejar de seguir
+                    newImage = R.drawable.favorite;
+                    project.cantidadFavoritos  -= 1;
+                }
+
+                // cambiamos la imagen
+                viewHolder.imgFavorite.setImageResource(newImage);
+
+                // actualizamos la cantidad de favoritos
+                viewHolder.txtvQuantityFavorites.setText(String.valueOf(project.cantidadFavoritos));
+            }
+        });
     }
 
     // Return the total count of items
@@ -97,10 +132,13 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
 
         public ImageView imgLogo;
         public ImageView imgUserImage;
+        public ImageView imgFavorite;
+        public ImageView imgComment;
         public TextView txtvUerName;
         public TextView txtvTitulo;
         public TextView txtvSubtitulo;
         public TextView txtvFecha;
+        public TextView txtvQuantityFavorites;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -116,6 +154,9 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
             imgUserImage = (ImageView) itemView.findViewById(R.id.imgvUserImage);
             txtvUerName = (TextView) itemView.findViewById(R.id.txtvUserName);
 
+            imgFavorite = (ImageView) itemView.findViewById(R.id.imgvFavorite);
+            imgComment = (ImageView) itemView.findViewById(R.id.imgvComment);
+            txtvQuantityFavorites = (TextView) itemView.findViewById(R.id.txtvQuantityFavorites);
 
         }
 

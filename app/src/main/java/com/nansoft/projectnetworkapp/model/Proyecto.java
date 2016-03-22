@@ -69,6 +69,12 @@ public class Proyecto
     @SerializedName("urlimagen_usuario")
     public String urlImagenUsuario;
 
+    @SerializedName("favorito")
+    public boolean favorito;
+
+    @SerializedName("cantidadFavoritos")
+    public int cantidadFavoritos;
+
     public Proyecto() {
     }
 
