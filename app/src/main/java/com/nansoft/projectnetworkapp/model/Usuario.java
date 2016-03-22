@@ -12,32 +12,35 @@ import java.text.SimpleDateFormat;
 public class Usuario
 {
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("nombre")
-    private String nombre;
+    public String nombre;
 
     @SerializedName("primerapellido")
-    private String primerApellido;
+    public String primerApellido;
 
     @SerializedName("segundoapellido")
-    private String segundoApellido;
+    public String segundoApellido;
 
     @SerializedName("email")
-    private String email;
+    public String email;
 
     @SerializedName("telefono")
-    private String telefono;
+    public String telefono;
 
     @SerializedName("urlimagen")
-    private String urlImagen;
+    public String urlImagen;
 
-    private String idCargo;
+    @SerializedName("cover_picture")
+    public String coverPicture;
 
-    private String fechaCreado;
+    public String idCargo;
+
+    public String fechaCreado;
 
     @SerializedName("biografia")
-    private String biografia;
+    public String biografia;
 
     public Usuario() {
         this.id = "Sin definir";
@@ -61,69 +64,6 @@ public class Usuario
         this.urlImagen = urlImagen;
     }
 
-    public String getId() {
-        return id.trim();
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre.trim();
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getPrimerApellido() {
-        return primerApellido.trim();
-    }
-
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-
-    public String getSegundoApellido() {
-        return segundoApellido.trim();
-    }
-
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
-    }
-
-    public String getEmail() {
-        return email.trim();
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelefono() {
-        return telefono.trim();
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen.trim();
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-
-    public String getIdCargo() {
-        return idCargo.trim();
-    }
-
-    public void setIdCargo(String idCargo) {
-        this.idCargo = idCargo;
-    }
 
     public String getFechaCreado() {
         SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -138,15 +78,5 @@ public class Usuario
         return fecha;
     }
 
-    public void setFechaCreado(String fechaCreado) {
-        this.fechaCreado = fechaCreado;
-    }
 
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
 }

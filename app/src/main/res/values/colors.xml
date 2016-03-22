@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background_window">#FFE5E5E5</color>
-    <color name="action_bar">#6E0000</color>
-    <color name="tab_divider">#CA0002</color>
-    <color name="green">#689F38</color>
-    <color name="greenDark">#3E5F22</color>
-    <color name="banana">#FFCC00</color>
-    <color name="white">#FFF</color>
-    <color name="fondo">#FDEFCB</color>
-    <color name="fondo_tab">#FFD0B6</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#009688</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="white">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="action_bar">@color/primary_text</color>
 
-    <color name="black">#FF000000</color>
-    <color name="gray">#FF8c8c8c</color>
-    <color name="android_blue">#FF33b5e5</color>
-    <color name="android_darkblue">#FF0099cc</color>
-    <color name="android_green">#FF99cc00</color>
-    <color name="android_darkgreen">#FF669900</color>
-    <color name="android_red">#FFff4444</color>
-    <color name="android_darkred">#FFcc0000</color>
-    <color name="android_yellow">#FFffd75a</color>
-    <color name="android_darkyellow">#FFffc40d</color>
-    <color name="android_orange">#FFffbb33</color>
-    <color name="android_darkorange">#FFff8800</color>
-    <color name="android_pink">#FFd9698c</color>
-    <color name="android_darkpink">#FFc3325f</color>
-    <color name="android_purple">#FFaa66cc</color>
-    <color name="android_darkpurple">#FF9933cc</color>
-
-    <color name="pressed_styled">#CC669900</color>
-
-
-    <color name="azure">#69D2E7</color>
 </resources>

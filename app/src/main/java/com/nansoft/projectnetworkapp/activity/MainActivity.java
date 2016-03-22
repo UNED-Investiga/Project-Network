@@ -6,8 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Pair;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -16,7 +14,6 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.adapter.FragmentPageAdapter;
@@ -25,19 +22,10 @@ import com.nansoft.projectnetworkapp.fragment.AreaFragment;
 import com.nansoft.projectnetworkapp.fragment.PerfilFragment;
 import com.nansoft.projectnetworkapp.fragment.ProyectoFragment;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-
-import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
-import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
-import com.nansoft.projectnetworkapp.helper.MobileServiceCustom;
+import com.nansoft.projectnetworkapp.helper.CustomMobileService;
 import com.nansoft.projectnetworkapp.model.FacebookUser;
 import com.nansoft.projectnetworkapp.model.Usuario;
 
@@ -58,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     private PagerSlidingTabStrip tabs;
     private ViewPager pager = null;
     private FragmentPageAdapter adapter;
-    public static MobileServiceCustom customClient;
+    public static CustomMobileService customClient;
 
     @Override
     protected void onCreate(Bundle arg0)
@@ -66,11 +54,11 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
         super.onCreate(arg0);
         this.setContentView(R.layout.main_activity);
 
-        customClient = new MobileServiceCustom(this);
+        customClient = new CustomMobileService(this);
 
         try{
             // cargamos el token
-            customClient.loadUserTokenCache(customClient.mClient);
+            customClient.loadUserTokenCache();
 
         }
         catch (Exception e)
@@ -116,8 +104,8 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     {
 
         List<Pair<String, String> > lp = new ArrayList<Pair<String, String> >();
-        lp.add(new Pair("id", customClient.mClient.getCurrentUser().getUserId()));
-        ListenableFuture<FacebookUser> result = customClient.mClient.invokeApi("user", "GET", null, FacebookUser.class);
+        lp.add(new Pair("id", CustomMobileService.mClient.getCurrentUser().getUserId()));
+        ListenableFuture<FacebookUser> result = CustomMobileService.mClient.invokeApi("user", "GET", null, FacebookUser.class);
 
         Futures.addCallback(result, new FutureCallback<FacebookUser>() {
             @Override
@@ -137,7 +125,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                     @Override
                     protected void onPreExecute() {
 
-                        mUserTable = customClient.mClient.getTable("usuario", Usuario.class);
+                        mUserTable = CustomMobileService.mClient.getTable("usuario", Usuario.class);
                     }
 
                     @Override
@@ -145,10 +133,8 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                         try {
 
 
-
                             // buscamos por el usuario
-                            MobileServiceCustom.USUARIO_LOGUEADO = mUserTable.lookUp(objUsuarioFacebook.id).get();
-
+                            CustomMobileService.USUARIO_LOGUEADO = mUserTable.lookUp(objUsuarioFacebook.id).get();
 
 
                             return true;
@@ -168,15 +154,14 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                                 // debemos de insertar el registro
 
                                 // establecemos primero los atributos
-                                MobileServiceCustom.USUARIO_LOGUEADO.setId(objUsuarioFacebook.id);
-                                MobileServiceCustom.USUARIO_LOGUEADO.setNombre(objUsuarioFacebook.name);
+                                CustomMobileService.USUARIO_LOGUEADO.id = objUsuarioFacebook.id;
+                                CustomMobileService.USUARIO_LOGUEADO.nombre = objUsuarioFacebook.name;
                                 objUsuarioFacebook.data.PictureURL.PictureURL = "http://graph.facebook.com/" + objUsuarioFacebook.id + "/picture?type=large";
-                                MobileServiceCustom.USUARIO_LOGUEADO.setUrlImagen(objUsuarioFacebook.data.PictureURL.PictureURL);
-
+                                CustomMobileService.USUARIO_LOGUEADO.urlImagen = objUsuarioFacebook.data.PictureURL.PictureURL;
 
 
                                 // agregamos el registro
-                                mUserTable.insert(MobileServiceCustom.USUARIO_LOGUEADO);
+                                mUserTable.insert(CustomMobileService.USUARIO_LOGUEADO);
                             } catch (final Exception exception2) {
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -189,13 +174,12 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
 
                         } finally {
                             // obtenemos la imagen del usuario en caso que la haya cambiado
-                            MobileServiceCustom.USUARIO_LOGUEADO.setUrlImagen("http://graph.facebook.com/" + MobileServiceCustom.USUARIO_LOGUEADO.getId() + "/picture?type=large");
-                            //MobileServiceCustom.USUARIO_LOGUEADO.setCover_picture(objUsuarioFacebook.cover.PictureURL);
-
+                            CustomMobileService.USUARIO_LOGUEADO.urlImagen = "http://graph.facebook.com/" + CustomMobileService.USUARIO_LOGUEADO.id + "/picture?type=large";
+                            //CustomMobileService.USUARIO_LOGUEADO.setCover_picture(objUsuarioFacebook.cover.PictureURL);
 
 
                             try {
-                                mUserTable.update(MobileServiceCustom.USUARIO_LOGUEADO).get();
+                                mUserTable.update(CustomMobileService.USUARIO_LOGUEADO).get();
                             } catch (final Exception exception) {
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -214,6 +198,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
                     protected void onPostExecute(Boolean success) {
 
 
+
                     }
 
                     @Override
@@ -224,8 +209,6 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
 
             }
         });
-
-
 
 
     }

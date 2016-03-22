@@ -8,19 +8,19 @@ import com.google.gson.annotations.SerializedName;
 public class UsuarioProyecto
 {
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("idusuario")
-    private String idUsuario;
+    public String idUsuario;
 
     @SerializedName("idproyecto")
-    private String idProyecto;
+    public String idProyecto;
 
     @SerializedName("idcargo")
-    private String idCargo;
+    public String idCargo;
 
     @SerializedName("__createdAt")
-    private String __createdAt;
+    public String __createdAt;
 
     public UsuarioProyecto(String id, String idUsuario, String idProyecto, String idCargo) {
         this.id = id;
@@ -29,43 +29,4 @@ public class UsuarioProyecto
         this.idCargo = idCargo;
     }
 
-    public String getId() {
-        return id.trim();
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario.trim();
-    }
-
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getIdProyecto() {
-        return idProyecto.trim();
-    }
-
-    public void setIdProyecto(String idProyecto) {
-        this.idProyecto = idProyecto;
-    }
-
-    public String getIdCargo() {
-        return idCargo.trim();
-    }
-
-    public void setIdCargo(String idCargo) {
-        this.idCargo = idCargo;
-    }
-
-    public String get__createdAt() {
-        return __createdAt.trim();
-    }
-
-    public void set__createdAt(String __createdAt) {
-        this.__createdAt = __createdAt;
-    }
 }

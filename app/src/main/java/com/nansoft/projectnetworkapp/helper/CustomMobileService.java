@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 /**
  * Created by Carlos on 01/10/2015.
  */
-public class MobileServiceCustom
+public class CustomMobileService
 {
     private final String URL_MOBILE_SERVICES =  "https://msprojectnetworkjs.azure-mobile.net/";
     private final String KEY_MOBILE_SERVICES =  "gSewfUQpGFAVMRajseDOZwqCCRUwwD62";
@@ -31,7 +31,7 @@ public class MobileServiceCustom
     private static final String TOKENPREF = "tkn";
     public static Usuario USUARIO_LOGUEADO = new Usuario();
 
-    public MobileServiceCustom(Context pContex)
+    public CustomMobileService(Context pContex)
     {
         contex = pContex;
         try {
@@ -60,7 +60,7 @@ public class MobileServiceCustom
         editor.commit();
     }
 
-    public boolean loadUserTokenCache(MobileServiceClient client)
+    public boolean loadUserTokenCache()
     {
         SharedPreferences prefs = contex.getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
         String userId = prefs.getString(USERIDPREF, "undefined");
@@ -72,7 +72,7 @@ public class MobileServiceCustom
 
         MobileServiceUser user = new MobileServiceUser(userId);
         user.setAuthenticationToken(token);
-        client.setCurrentUser(user);
+        mClient.setCurrentUser(user);
 
         return true;
     }

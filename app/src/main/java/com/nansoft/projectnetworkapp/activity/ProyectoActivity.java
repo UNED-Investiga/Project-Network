@@ -80,7 +80,7 @@ public class ProyectoActivity extends ActionBarActivity {
 
 
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -97,7 +97,7 @@ public class ProyectoActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(view.getContext(), PerfilUsuarioActivity.class);
-                intent.putExtra("idUsuario",adapter.getItem(position-1).getId());
+                intent.putExtra("idUsuario",adapter.getItem(position-1).id);
                 startActivity(intent);
             }
         });
@@ -152,22 +152,22 @@ public class ProyectoActivity extends ActionBarActivity {
                     objProyecto = mProyectoTable.lookUp(pIdProyecto).get();
 
 
-                    final MobileServiceList<UsuarioProyecto> result = mUsuarioProyectoTable.where().field("idproyecto").eq(objProyecto.getId()).select("idusuario","idcargo").execute().get();
+                    final MobileServiceList<UsuarioProyecto> result = mUsuarioProyectoTable.where().field("idproyecto").eq(objProyecto.id).select("idusuario","idcargo").execute().get();
 
                     // agregamos el encargado del proyecto
                     objUsuario = new Usuario();
-                    objUsuario = mUsuarioTable.lookUp(objProyecto.getIdEncargado()).get();
-                    objUsuario.setIdCargo("1");
-                    objUsuario.setFechaCreado(objProyecto.get__createdAt());
+                    objUsuario = mUsuarioTable.lookUp(objProyecto.idEncargado).get();
+                    objUsuario.idCargo = "1";
+                    objUsuario.fechaCreado = objProyecto.__createdAt;
                     lstUsuarios.add(objUsuario);
 
 
                     for(UsuarioProyecto item : result)
                     {
                         objUsuario = new Usuario();
-                        objUsuario = mUsuarioTable.lookUp(item.getIdUsuario()).get();
-                        objUsuario.setIdCargo(item.getIdCargo());
-                        objUsuario.setFechaCreado(item.get__createdAt());
+                        objUsuario = mUsuarioTable.lookUp(item.idUsuario).get();
+                        objUsuario.idCargo = item.idCargo;
+                        objUsuario.fechaCreado = item.__createdAt;
                         lstUsuarios.add(objUsuario);
                     }
 
@@ -229,7 +229,7 @@ public class ProyectoActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    String [] pPara = {pObjProyecto.getEmail()};
+                    String [] pPara = {pObjProyecto.email};
                     Intent Correo = new Intent(Intent.ACTION_SEND);
                     Correo.setData(Uri.parse("mailto:"));
                     Correo.putExtra(Intent.EXTRA_EMAIL,pPara);
@@ -252,7 +252,7 @@ public class ProyectoActivity extends ActionBarActivity {
             public void onClick(View view) {
                 try {
 
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pObjProyecto.getWebSite()));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(pObjProyecto.webSite));
                     startActivity(intent);
                 } catch (ActivityNotFoundException activityException) {
 
@@ -262,19 +262,19 @@ public class ProyectoActivity extends ActionBarActivity {
             }
         });
 
-        txtvNombreProyecto.setText(pObjProyecto.getNombre());
+        txtvNombreProyecto.setText(pObjProyecto.nombre);
 
-        txtvDescripcioProyecto.setText(pObjProyecto.getDescripcion());
+        txtvDescripcioProyecto.setText(pObjProyecto.descripcion);
 
         Glide.with(this)
-                .load(pObjProyecto.getUrlImagen().trim())
+                .load(pObjProyecto.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
                 .error(R.drawable.picture_removed)
                 .into(imgvLogoProyecto);
 
-        switch (pObjProyecto.getIdEstado())
+        switch (pObjProyecto.idEstado)
         {
             case "1":
                 imgvEstadoProyecto.setImageResource(R.drawable.active);

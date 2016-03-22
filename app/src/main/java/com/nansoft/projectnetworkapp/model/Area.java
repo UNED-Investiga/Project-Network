@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName;
 public class Area
 {
     @SerializedName("id")
-    private String id;
+    public String id;
 
     @SerializedName("nombre")
-    private String nombre;
+    public String nombre;
 
     @SerializedName("urlimagen")
-    private String urlImagen;
+    public String urlImagen;
 
     public Area() {
 
@@ -27,27 +27,5 @@ public class Area
         this.urlImagen = urlImagen;
     }
 
-    public String getId() {
-        return id.trim();
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre.trim();
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen.trim();
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
 }

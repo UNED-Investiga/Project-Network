@@ -43,7 +43,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
     TextView txtvSad;
 
     View headerListView;
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +74,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
 
 
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -91,7 +91,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
-                intent.putExtra("idProyecto",adapter.getItem(position-1).getId());
+                intent.putExtra("idProyecto",adapter.getItem(position-1).id);
                 startActivity(intent);
             }
         });
@@ -149,18 +149,18 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
                     objUsuario = mUsuarioTable.lookUp(idUsuario).get();
 
 
-                    final MobileServiceList<UsuarioProyecto> result = mUsuarioProyectoTable.where().field("idusuario").eq(objUsuario.getId()).select("idproyecto","idcargo").execute().get();
+                    final MobileServiceList<UsuarioProyecto> result = mUsuarioProyectoTable.where().field("idusuario").eq(objUsuario.id).select("idproyecto","idcargo").execute().get();
 
 
                     for(UsuarioProyecto item : result)
                     {
                         objProyecto = new Proyecto();
-                        objProyecto = mProyectoTable.lookUp(item.getIdProyecto()).get();
+                        objProyecto = mProyectoTable.lookUp(item.idProyecto).get();
 
                         objArea = new Area();
-                        objArea = mAreaTable.lookUp(objProyecto.getIdArea()).get();
-                        objProyecto.setNombreAux(objArea.getNombre());
-                        objProyecto.setIdCargoAux(item.getIdCargo());
+                        objArea = mAreaTable.lookUp(objProyecto.idArea).get();
+                        objProyecto.nombreArea = objArea.nombre;
+                        objProyecto.idCargoAux = item.idCargo;
                         lstProyectos.add(objProyecto);
                     }
 
@@ -217,7 +217,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    String [] pPara = {pObjUsuario.getEmail()};
+                    String [] pPara = {pObjUsuario.email};
                     Intent Correo = new Intent(Intent.ACTION_SEND);
                     Correo.setData(Uri.parse("mailto:"));
                     Correo.putExtra(Intent.EXTRA_EMAIL,pPara);
@@ -240,7 +240,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
             public void onClick(View view) {
                 try
                 {
-                    Intent Llamada = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + pObjUsuario.getTelefono()));
+                    Intent Llamada = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + pObjUsuario.telefono));
                     startActivity(Llamada);
 
                 } catch (ActivityNotFoundException activityException) {
@@ -251,12 +251,12 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
             }
         });
 
-        txtvNombreUsuario.setText(pObjUsuario.getNombre() + " " + pObjUsuario.getPrimerApellido() + " " + pObjUsuario.getSegundoApellido());
+        txtvNombreUsuario.setText(pObjUsuario.nombre + " " + pObjUsuario.primerApellido + " " + pObjUsuario.segundoApellido);
 
-        txtvBiografiaUsuario.setText(pObjUsuario.getBiografia());
+        txtvBiografiaUsuario.setText(pObjUsuario.biografia);
 
         Glide.with(this)
-                .load(pObjUsuario.getUrlImagen().trim())
+                .load(pObjUsuario.urlImagen.trim())
                 .asBitmap()
                 .fitCenter()
                 .placeholder(R.drawable.picture)
@@ -311,4 +311,5 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    */
 }

@@ -1,0 +1,69 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgvUserProfileCover"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#AA000000"/>
+
+    <com.nansoft.projectnetworkapp.helper.CircularImageView
+        xmlns:app="http://schemas.android.com/apk/res/com.nansoft.projectnetworkapp"
+        android:id="@+id/imgvUserProfilePhoto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/picture"
+        app:border="true"
+        app:border_color="@color/white"
+        app:border_width="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
+
+    <TextView
+        android:id="@+id/txtvUserProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:text="Lorem ipsum"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imgvUserProfilePhoto"
+        android:layout_marginTop="12dp"
+        android:textColor="#fff"/>
+
+    <LinearLayout
+        android:id="@+id/layDireccionUsuario"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtvUserProfileName"
+        android:weightSum="2"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/location" />
+
+        <TextView
+            android:id="@+id/txttvUserProfileAddress"
+            android:text="Costa Rica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

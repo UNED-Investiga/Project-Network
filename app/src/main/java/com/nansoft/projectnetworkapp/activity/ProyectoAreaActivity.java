@@ -31,6 +31,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
     ImageView imgvSad;
     TextView txtvSad;
 
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +59,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
 
         listview.setAdapter(adapter);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swprlProyectosArea);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -80,7 +81,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
 
                 try {
                     Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
-                    intent.putExtra("idProyecto", adapter.getItem(position).getId());
+                    intent.putExtra("idProyecto", adapter.getItem(position).id);
                     startActivity(intent);
                 } catch (Exception e) {
 
@@ -127,7 +128,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
                         public void run() {
                             for (Proyecto item : result)
                             {
-                                item.setNombreAux(pNombreArea);
+                                item.nombreArea = pNombreArea;
                                 adapter.add(item);
                                 adapter.notifyDataSetChanged();
                             }
@@ -199,5 +200,5 @@ public class ProyectoAreaActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
 }

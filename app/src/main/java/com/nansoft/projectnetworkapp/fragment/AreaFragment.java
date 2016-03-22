@@ -61,7 +61,7 @@ public class AreaFragment extends Fragment
         gridView.setAdapter(adapter);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swprlArea);
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.android_darkorange, R.color.green, R.color.android_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -83,8 +83,8 @@ public class AreaFragment extends Fragment
 
                 try {
                     Intent intent = new Intent(view.getContext(), ProyectoAreaActivity.class);
-                    intent.putExtra("idArea", adapter.getItem(position).getId());
-                    intent.putExtra("nombreArea",adapter.getItem(position).getNombre());
+                    intent.putExtra("idArea", adapter.getItem(position).id);
+                    intent.putExtra("nombreArea",adapter.getItem(position).nombre);
                     startActivity(intent);
                 } catch (Exception e) {
 
