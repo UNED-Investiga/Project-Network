@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,7 @@ import com.nansoft.projectnetworkapp.model.Area;
 import com.nansoft.projectnetworkapp.model.Proyecto;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 /**
  * Created by User on 7/8/2015.
@@ -34,17 +38,19 @@ import java.net.MalformedURLException;
 public class AreaFragment extends Fragment
 {
     SwipeRefreshLayout mSwipeRefreshLayout;
-    public static AreaAdapter adapter;
+    AreaAdapter adapter;
     ImageView imgvSad;
     TextView txtvSad;
+    ArrayList <Area> areasList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //This layout contains your list view
-        View view = inflater.inflate(R.layout.areas_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_general, container, false);
 
+        areasList = new ArrayList<Area>();
 
         View includedLayout = view.findViewById(R.id.sindatos);
         imgvSad = (ImageView) includedLayout.findViewById(R.id.imgvInfoProblema);
@@ -52,15 +58,15 @@ public class AreaFragment extends Fragment
 
         txtvSad.setText(getResources().getString(R.string.noconnection));
 
-        //now you must initialize your list view
-        GridView gridView =(GridView)view.findViewById(R.id.gridAreas);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.lstvGeneral);
 
-        adapter = new AreaAdapter(view.getContext(),R.layout.area_item);
+        adapter = new AreaAdapter(view.getContext(),areasList);
 
 
-        gridView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(),2));
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swprlArea);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swprlGeneral);
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary_dark);
 
 
@@ -76,7 +82,7 @@ public class AreaFragment extends Fragment
                 mSwipeRefreshLayout.setRefreshing(true);
             }
         });
-
+    /*
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -91,7 +97,7 @@ public class AreaFragment extends Fragment
                 }
             }
         });
-
+*/
         cargarAreas(getActivity());
         return view;
     }
@@ -114,7 +120,7 @@ public class AreaFragment extends Fragment
                             "gSewfUQpGFAVMRajseDOZwqCCRUwwD62",
                             activity.getApplicationContext()
                     );
-                    adapter.clear();
+
                 } catch (MalformedURLException e) {
 
                 }
@@ -124,21 +130,19 @@ public class AreaFragment extends Fragment
             @Override
             protected Boolean doInBackground(Void... params) {
                 try {
-                    final MobileServiceList<Area> result = mAreaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
+                    areasList = mAreaTable.orderBy("nombre", QueryOrder.Ascending).execute().get();
+
+                    adapter.setData(areasList);
 
                     activity.runOnUiThread(new Runnable() {
-
                         @Override
                         public void run() {
-                            for (Area item : result)
-                            {
-
-                                adapter.add(item);
-                                adapter.notifyDataSetChanged();
-                            }
-
+                            adapter.notifyDataSetChanged();
                         }
                     });
+
+
+
                     return true;
                 } catch (Exception exception) {
 
@@ -166,7 +170,7 @@ public class AreaFragment extends Fragment
 
     private void estadoAdapter(boolean pEstadoError)
     {
-        if(adapter.isEmpty() && pEstadoError)
+        if(areasList.isEmpty() && pEstadoError)
         {
             imgvSad.setVisibility(View.VISIBLE);
             txtvSad.setVisibility(View.VISIBLE);
