@@ -1,19 +1,16 @@
 package com.nansoft.projectnetworkapp.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.model.Area;
-import com.nansoft.projectnetworkapp.model.Proyecto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +41,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.ViewHolder>
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View view = inflater.inflate(R.layout.area_item, parent, false);
+        View view = inflater.inflate(R.layout.item_area, parent, false);
 
         // Return a new holder instance
         ViewHolder viewHolder = new ViewHolder(view);

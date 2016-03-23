@@ -52,7 +52,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     protected void onCreate(Bundle arg0)
     {
         super.onCreate(arg0);
-        this.setContentView(R.layout.main_activity);
+        this.setContentView(R.layout.activity_main);
 
         customClient = new CustomMobileService(this);
 

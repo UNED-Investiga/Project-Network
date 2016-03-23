@@ -4,8 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +21,6 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.nansoft.projectnetworkapp.R;
-import com.nansoft.projectnetworkapp.adapter.ProyectoAdapter;
 import com.nansoft.projectnetworkapp.adapter.UsuarioAdapter;
 import com.nansoft.projectnetworkapp.model.Proyecto;
 import com.nansoft.projectnetworkapp.model.Usuario;
@@ -48,7 +44,7 @@ public class ProyectoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.infoproyecto_activity);
+        setContentView(R.layout.activity_infoproyecto);
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 
@@ -73,7 +69,7 @@ public class ProyectoActivity extends ActionBarActivity {
 
         lstvUsuarios = (ListView) findViewById(R.id.lstvUsuarios);
         lstvUsuarios.addHeaderView(headerListView);
-        adapter = new UsuarioAdapter(this,R.layout.general_item);
+        adapter = new UsuarioAdapter(this,R.layout.item_general);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swprlInfoProyecto);
 

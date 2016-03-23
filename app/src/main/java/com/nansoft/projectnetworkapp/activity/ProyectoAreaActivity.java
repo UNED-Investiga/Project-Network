@@ -35,7 +35,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.proyectoarea_activity);
+        setContentView(R.layout.activity_proyectoarea);
 
 
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -54,7 +54,7 @@ public class ProyectoAreaActivity extends ActionBarActivity {
         txtvSad = (TextView) includedLayout.findViewById(R.id.txtvInfoProblema);
 
         txtvSad.setText(getResources().getString(R.string.nodata));
-        adapter = new ProyectoAdapter(this, R.layout.general_item);
+        adapter = new ProyectoAdapter(this, R.layout.item_general);
 
 
         listview.setAdapter(adapter);

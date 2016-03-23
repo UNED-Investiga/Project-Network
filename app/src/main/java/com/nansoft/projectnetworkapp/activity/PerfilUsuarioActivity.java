@@ -47,7 +47,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.perfil_usuario_activity);
+        setContentView(R.layout.activity_perfil_usuario);
 
         // Set up action bar.
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -67,7 +67,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
         ListView lstvProyectos = (ListView) findViewById(R.id.lstvProyectosUsuario);
         headerListView = getLayoutInflater().inflate(R.layout.header_user, null);
         lstvProyectos.addHeaderView(headerListView);
-        adapter = new ProyectoAdapter(this,R.layout.general_item);
+        adapter = new ProyectoAdapter(this,R.layout.item_general);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swprlPerfilUsuario);
 
