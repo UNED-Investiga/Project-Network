@@ -27,6 +27,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.nansoft.projectnetworkapp.fragment.AreaFragment;
+import com.nansoft.projectnetworkapp.fragment.MyProjectsFragment;
 import com.nansoft.projectnetworkapp.fragment.PerfilFragment;
 import com.nansoft.projectnetworkapp.fragment.ProyectoFragment;
 import com.nansoft.projectnetworkapp.helper.CircularImageView;
@@ -277,6 +278,10 @@ public class HomeActivity extends AppCompatActivity
         {
             case R.id.nav_recent:
                 fragment = new ProyectoFragment();
+                break;
+
+            case R.id.nav_favorite:
+                fragment = new MyProjectsFragment();
                 break;
 
             case R.id.nav_search:

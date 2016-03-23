@@ -2,6 +2,11 @@
 <resources>
 
     <string name="app_name">Project Network</string>
+    <string name="last_projects_activity">Reciente</string>
+    <string name="my_projects_activity">Seguimiento</string>
+    <string name="areas_activity">Areas</string>
+
+
     <string name="action_contact">Contact</string>
     <string name="test">Test</string>
 

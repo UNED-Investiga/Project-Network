@@ -44,9 +44,12 @@ public class ProyectoFragment  extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         //This layout contains your list view
         View view = inflater.inflate(R.layout.fragment_general, container, false);
+
+        getActivity().setTitle(getString(R.string.last_projects_activity));
 
         // layout de error
         View includedLayout = view.findViewById(R.id.sindatos);

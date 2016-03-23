@@ -50,6 +50,8 @@ public class AreaFragment extends Fragment
         //This layout contains your list view
         View view = inflater.inflate(R.layout.fragment_general, container, false);
 
+        getActivity().setTitle(getString(R.string.areas_activity));
+
         areasList = new ArrayList<Area>();
 
         View includedLayout = view.findViewById(R.id.sindatos);

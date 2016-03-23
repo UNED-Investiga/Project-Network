@@ -45,6 +45,8 @@ public class MyProjectsFragment extends Fragment {
         //This layout contains your list view
         View view = inflater.inflate(R.layout.fragment_general, container, false);
 
+        getActivity().setTitle(getString(R.string.my_projects_activity));
+
         // layout de error
         View includedLayout = view.findViewById(R.id.sindatos);
         imgvSad = (ImageView) includedLayout.findViewById(R.id.imgvInfoProblema);
