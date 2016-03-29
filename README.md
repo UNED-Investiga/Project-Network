@@ -16,11 +16,21 @@ You can download the current version from Google Play
 
 ## ScreenShot
 
+Proyectos recientes
+
 ![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/master/screenshot/00.png)
+
+Mi Perfil
 
 ![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/master/screenshot/01.png)
 
+Buscar
+
 ![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/master/screenshot/02.png)
+
+Detalle de proyecto
+
+![ScreenShot](https://raw.github.com/UNED-Investiga/Project-Network-Android/master/screenshot/03.png)
 
 ## License
 
