@@ -1,6 +1,9 @@
 package com.nansoft.projectnetworkapp.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.ParseException;
@@ -11,8 +14,7 @@ import java.util.Date;
 /**
  * Created by User on 6/19/2015.
  */
-public class Proyecto
-{
+public class Proyecto implements Parcelable {
     @SerializedName("id")
     public String id;
 
@@ -115,4 +117,69 @@ public class Proyecto
         return fecha;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.nombre);
+        dest.writeString(this.descripcion);
+        dest.writeString(this.email);
+        dest.writeString(this.webSite);
+        dest.writeInt(this.cantidadSocios);
+        dest.writeString(this.fechaCreacion);
+        dest.writeString(this.__createdAt);
+        dest.writeString(this.urlImagen);
+        dest.writeString(this.idEncargado);
+        dest.writeString(this.idEstado);
+        dest.writeString(this.idArea);
+        dest.writeString(this.idCargoAux);
+        dest.writeString(this.nombreArea);
+        dest.writeString(this.idUsuario);
+        dest.writeString(this.primerApellidoUsuario);
+        dest.writeString(this.segundoApellidoUsuario);
+        dest.writeString(this.nombreUsuario);
+        dest.writeString(this.urlImagenUsuario);
+        dest.writeByte(favorito ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.cantidadFavoritos);
+    }
+
+    protected Proyecto(Parcel in) {
+        this.id = in.readString();
+        this.nombre = in.readString();
+        this.descripcion = in.readString();
+        this.email = in.readString();
+        this.webSite = in.readString();
+        this.cantidadSocios = in.readInt();
+        this.fechaCreacion = in.readString();
+        this.__createdAt = in.readString();
+        this.urlImagen = in.readString();
+        this.idEncargado = in.readString();
+        this.idEstado = in.readString();
+        this.idArea = in.readString();
+        this.idCargoAux = in.readString();
+        this.nombreArea = in.readString();
+        this.idUsuario = in.readString();
+        this.primerApellidoUsuario = in.readString();
+        this.segundoApellidoUsuario = in.readString();
+        this.nombreUsuario = in.readString();
+        this.urlImagenUsuario = in.readString();
+        this.favorito = in.readByte() != 0;
+        this.cantidadFavoritos = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Proyecto> CREATOR = new Parcelable.Creator<Proyecto>() {
+        @Override
+        public Proyecto createFromParcel(Parcel source) {
+            return new Proyecto(source);
+        }
+
+        @Override
+        public Proyecto[] newArray(int size) {
+            return new Proyecto[size];
+        }
+    };
 }

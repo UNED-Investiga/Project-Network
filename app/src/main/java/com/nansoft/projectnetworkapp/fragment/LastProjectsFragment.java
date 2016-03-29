@@ -33,7 +33,7 @@ import java.lang.reflect.Type;
 /**
  * Created by User on 7/8/2015.
  */
-public class ProyectoFragment  extends Fragment
+public class LastProjectsFragment extends Fragment
 {
     SwipeRefreshLayout mSwipeRefreshLayout;
     ProyectoAdapter adapter;
@@ -90,7 +90,7 @@ public class ProyectoFragment  extends Fragment
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 try {
-                    Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
+                    Intent intent = new Intent(view.getContext(), ProjectDescriptionActivity.class);
                     intent.putExtra("idProyecto", adapter.getItem(position).id);
                     startActivity(intent);
                 } catch (Exception e) {

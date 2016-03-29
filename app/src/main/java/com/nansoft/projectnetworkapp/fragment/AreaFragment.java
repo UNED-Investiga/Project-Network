@@ -1,33 +1,24 @@
 package com.nansoft.projectnetworkapp.fragment;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
-import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.QueryOrder;
 import com.nansoft.projectnetworkapp.R;
-import com.nansoft.projectnetworkapp.activity.ProyectoActivity;
-import com.nansoft.projectnetworkapp.activity.ProyectoAreaActivity;
 import com.nansoft.projectnetworkapp.adapter.AreaAdapter;
 import com.nansoft.projectnetworkapp.model.Area;
-import com.nansoft.projectnetworkapp.model.Proyecto;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;

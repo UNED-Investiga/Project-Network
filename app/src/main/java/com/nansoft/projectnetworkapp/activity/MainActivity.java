@@ -19,8 +19,8 @@ import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.adapter.FragmentPageAdapter;
 import com.nansoft.projectnetworkapp.animation.ZoomOutPageTransformer;
 import com.nansoft.projectnetworkapp.fragment.AreaFragment;
+import com.nansoft.projectnetworkapp.fragment.LastProjectsFragment;
 import com.nansoft.projectnetworkapp.fragment.PerfilFragment;
-import com.nansoft.projectnetworkapp.fragment.ProyectoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
         adapter = new FragmentPageAdapter(
                 getSupportFragmentManager(), this);
 
-        adapter.addFragment(new ProyectoFragment());
+        adapter.addFragment(new LastProjectsFragment());
         adapter.addFragment(new AreaFragment());
         adapter.addFragment(new PerfilFragment());
 

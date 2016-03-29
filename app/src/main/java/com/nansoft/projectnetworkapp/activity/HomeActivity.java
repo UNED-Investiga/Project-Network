@@ -29,12 +29,10 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.nansoft.projectnetworkapp.fragment.AreaFragment;
 import com.nansoft.projectnetworkapp.fragment.MyProjectsFragment;
-import com.nansoft.projectnetworkapp.fragment.PerfilFragment;
-import com.nansoft.projectnetworkapp.fragment.ProyectoFragment;
+import com.nansoft.projectnetworkapp.fragment.LastProjectsFragment;
 import com.nansoft.projectnetworkapp.helper.CircularImageView;
 import com.nansoft.projectnetworkapp.R;
 import com.nansoft.projectnetworkapp.helper.CustomMobileService;
-import com.nansoft.projectnetworkapp.model.Area;
 import com.nansoft.projectnetworkapp.model.FacebookUser;
 import com.nansoft.projectnetworkapp.model.Usuario;
 
@@ -80,7 +78,7 @@ public class HomeActivity extends AppCompatActivity
 
         cargarUsuario();
 
-        Fragment fragment = new ProyectoFragment();
+        Fragment fragment = new LastProjectsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         // se cambia el fragment
@@ -277,12 +275,12 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
-        Fragment fragment = new ProyectoFragment();
+        Fragment fragment = new LastProjectsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch (item.getItemId())
         {
             case R.id.nav_recent:
-                fragment = new ProyectoFragment();
+                fragment = new LastProjectsFragment();
                 break;
 
             case R.id.nav_favorite:

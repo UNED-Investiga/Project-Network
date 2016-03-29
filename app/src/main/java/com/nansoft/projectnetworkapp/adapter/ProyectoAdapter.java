@@ -1,6 +1,7 @@
 package com.nansoft.projectnetworkapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nansoft.projectnetworkapp.R;
+import com.nansoft.projectnetworkapp.activity.ProjectDescriptionActivity;
 import com.nansoft.projectnetworkapp.model.Proyecto;
 
 import java.util.List;
@@ -81,6 +83,21 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
                 .into(viewHolder.imgUserImage);
 
         // click listeners
+        viewHolder.imgLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startProjectActivity(project);
+            }
+        });
+
+        viewHolder.txtvTitulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startProjectActivity(project);
+            }
+        });
+
+
         viewHolder.imgFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,17 +108,14 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
                 project.favorito = !project.favorito;
 
                 // verificamos la acción que debemos realizar
-                if (project.favorito)
-                {
+                if (project.favorito) {
                     // acción de seguir
                     newImage = R.drawable.favorite_filled;
-                    project.cantidadFavoritos  += 1;
-                }
-                else
-                {
+                    project.cantidadFavoritos += 1;
+                } else {
                     // acción dejar de seguir
                     newImage = R.drawable.favorite;
-                    project.cantidadFavoritos  -= 1;
+                    project.cantidadFavoritos -= 1;
                 }
 
                 // cambiamos la imagen
@@ -111,6 +125,14 @@ public class ProyectoAdapter extends RecyclerView.Adapter<ProyectoAdapter.ViewHo
                 viewHolder.txtvQuantityFavorites.setText(String.valueOf(project.cantidadFavoritos));
             }
         });
+    }
+
+    private void startProjectActivity(Proyecto project)
+    {
+        Intent intent = new Intent(mContext, ProjectDescriptionActivity.class);
+        intent.putExtra("project",project);
+        mContext.startActivity(intent);
+
     }
 
     // Return the total count of items

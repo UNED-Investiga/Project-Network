@@ -86,7 +86,7 @@ public class MyProjectsFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 try {
-                    Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
+                    Intent intent = new Intent(view.getContext(), ProjectDescriptionActivity.class);
                     intent.putExtra("idProyecto", adapter.getItem(position).id);
                     startActivity(intent);
                 } catch (Exception e) {

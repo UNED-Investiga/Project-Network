@@ -90,7 +90,7 @@ public class PerfilUsuarioActivity extends ActionBarActivity {
         lstvProyectos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent(view.getContext(), ProyectoActivity.class);
+                Intent intent = new Intent(view.getContext(), ProjectDescriptionActivity.class);
                 intent.putExtra("idProyecto",adapter.getItem(position-1).id);
                 startActivity(intent);
             }
