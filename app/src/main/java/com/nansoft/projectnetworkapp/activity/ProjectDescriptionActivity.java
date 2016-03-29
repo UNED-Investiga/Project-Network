@@ -26,17 +26,6 @@ public class ProjectDescriptionActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(getTitle());
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         project = new Proyecto();
 
@@ -50,8 +39,31 @@ public class ProjectDescriptionActivity extends AppCompatActivity {
 
         }
 
+        CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
+        TextView txtvProjectName = (TextView) findViewById(R.id.txtvProjectName);
+        txtvProjectName.setText(project.nombre);
+
+
         TextView txtvProjectDescription = (TextView) findViewById(R.id.txtvProjectDescription);
         txtvProjectDescription.setText(project.descripcion);
+
+        TextView txtvProjectArea = (TextView) findViewById(R.id.txtvProjectArea);
+        txtvProjectArea.setText(project.nombreArea);
+
+
+
     }
 
     @Override

@@ -20,8 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/imgvProjectImage"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/fondo_login"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -30,16 +36,22 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-            <ImageView
-                android:id="@+id/imgvProjectImage"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:src="@drawable/fondo_login"/>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+
     <include layout="@layout/content_project_description" />
+
+    <!--
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rclrvProjectDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    -->
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
